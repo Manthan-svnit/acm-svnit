@@ -1,14 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-// 1. Import your new layout components
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const inter = Inter({
+// ── Heading / Display font ────────────────────────────────────────────────────
+// Space Grotesk: geometric, modern, perfect for a futuristic tech chapter.
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-heading",
+  display: "swap",   // prevents FOUC — shows fallback font until loaded
+});
+
+// ── Body font ─────────────────────────────────────────────────────────────────
+// Plus Jakarta Sans: clean, warm, highly legible at all sizes.
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-acm-bg-dark`}>
+      <body className={`${spaceGrotesk.variable} ${plusJakarta.variable} font-sans antialiased min-h-screen flex flex-col bg-acm-bg-dark`}>
         {/* 2. Drop the Navbar at the very top */}
         <Navbar />
 

@@ -1,10 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  /* 1. Add your custom Inter font */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* ── Fonts ─────────────────────────────────────────────────────────────── */
+  /* Body font: Plus Jakarta Sans (injected via layout.tsx as --font-sans)   */
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 
-  /* 2. Add your custom ACM color palette */
+  /* Heading font: Space Grotesk (injected via layout.tsx as --font-heading) */
+  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── ACM Color Palette ──────────────────────────────────────────────────── */
   --color-acm-primary: #00539C;
   --color-acm-accent: #00BFFF;
   --color-acm-gray: #666666;
@@ -13,10 +17,10 @@
   --color-acm-bg-light: #F5F5F5;
 }
 
-/* 3. Base styles for the dark theme feel */
+/* Base styles */
 @layer base {
   body {
-    background-color: #FFFFFF;
-    color: #1A1A1A;
+    background-color: #0d1117;
+    color: #ffffff;
   }
-}
+}
