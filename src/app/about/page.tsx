@@ -97,14 +97,21 @@ export default function AboutPage() {
         <div className="bg-[#0a0a0a] text-white">
 
             {/* 1 ── HERO ──────────────────────────────────────────────────────────── */}
-            <section className="relative h-[52vh] min-h-[380px] flex items-center justify-center -mt-20 overflow-hidden">
-                {/* Background layers */}
-                <div className="absolute inset-0 bg-[#0a0a0a]" />
+            <section className="relative min-h-screen flex items-center justify-center -mt-20 overflow-hidden">
+                {/* ── Background image ── Place your photo at: public/About-bg-image.jpg */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: "url('/About-bg-image.jpg')" }}
+                />
+                {/* Dark overlay — adjust opacity to taste (50% = more image, 75% = more text contrast) */}
+                <div className="absolute inset-0 bg-black/55" />
+                {/* Blue radial glow accent */}
                 <div className="absolute inset-0" style={{
-                    background: "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0,85,162,0.35) 0%, transparent 70%)",
+                    background: "radial-gradient(ellipse 70% 50% at 50% 100%, rgba(0,85,162,0.4) 0%, transparent 70%)",
                 }} />
-                <div className="absolute inset-0 opacity-[0.06]" style={{
-                    backgroundImage: "/About-bg-image.jpg",
+                {/* Subtle grid texture */}
+                <div className="absolute inset-0 opacity-[0.05]" style={{
+                    backgroundImage: "linear-gradient(rgba(0,191,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(0,191,255,0.6) 1px, transparent 1px)",
                     backgroundSize: "50px 50px",
                 }} />
 
