@@ -56,19 +56,22 @@ const focusAreas = [
 const timeline = [
     {
         year: "2026 – Present", name: "Manthan Dhangar", role: "Chapter President",
-        // FIX 2: Uncommented these so TypeScript doesn't crash when rendering the fallback avatars
+        initials: "MD", color: "#0055A2",
         photo: "/Leader-About.jpg",
     },
     {
         year: "2025 – 2026", name: "Arjun Patel", role: "Chapter President",
+        initials: "AP", color: "#0077cc",
         photo: "/Leader-About.jpg",
     },
     {
         year: "2024 – 2025", name: "Priya Sharma", role: "Chapter President",
+        initials: "PS", color: "#0099dd",
         photo: "/leader-About.jpg"
     },
     {
         year: "2023 – 2024", name: "Rahul Mehta", role: "Chapter President",
+        initials: "RM", color: "#00BFFF",
         photo: "/leader-About.jpg",
     },
 ];
