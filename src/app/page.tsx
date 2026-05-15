@@ -144,7 +144,7 @@ function Preloader({ onComplete }: { onComplete: () => void }) {
 const awards = [
   {
     icon: Trophy,
-    title: "Best Student Chapter 2026",
+    title: "NIT SURAT",
     body: "Recognized nationally by ACM India for outstanding technical contributions and community impact.",
     color: "#FFD700",
     bg: "from-yellow-900/30 to-transparent",
@@ -422,7 +422,7 @@ export default function Home() {
           >
             <Trophy size={14} className="text-yellow-400" />
             <span className="text-yellow-300 text-sm font-semibold tracking-wide">
-              Best Student Chapter 2026
+              NIT SURAT PRESENTS
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
           </motion.div>

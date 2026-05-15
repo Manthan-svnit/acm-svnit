@@ -32,9 +32,12 @@ export default function Footer() {
                     <div>
                         <h3 className="text-white font-semibold uppercase tracking-wider mb-4">Connect</h3>
                         <ul className="space-y-3">
-                            <li className="hover:text-acm-accent transition-colors cursor-pointer">LinkedIn</li>
-                            <li className="hover:text-acm-accent transition-colors cursor-pointer">Instagram</li>
-                            <li className="hover:text-acm-accent transition-colors cursor-pointer">GitHub</li>
+                            <li>
+                                <a href="https://www.linkedin.com/company/acmnitsurat/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="hover:text-acm-accent transition-colors">LinkedIn</a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/acmnitsurat/" target="_blank" rel="noopener noreferrer" className="hover:text-acm-accent transition-colors">Instagram</a>
+                            </li>
                             <li className="mt-4 pt-4 border-t border-gray-800">
                                 <a href="mailto:acm@svnit.ac.in" className="hover:text-white transition-colors">
                                     acm@svnit.ac.in

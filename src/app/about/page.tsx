@@ -56,23 +56,19 @@ const focusAreas = [
 const timeline = [
     {
         year: "2026 – Present", name: "Manthan Dhangar", role: "Chapter President",
-        initials: "MD", color: "#0055A2",
         photo: "/Leader-About.jpg",
     },
     {
         year: "2025 – 2026", name: "Arjun Patel", role: "Chapter President",
-        initials: "AP", color: "#0077cc",
         photo: "/Leader-About.jpg",
     },
     {
         year: "2024 – 2025", name: "Priya Sharma", role: "Chapter President",
-        initials: "PS", color: "#0099dd",
-        photo: "/leader-About.jpg"
+        photo: "/Leader-About.jpg"
     },
     {
         year: "2023 – 2024", name: "Rahul Mehta", role: "Chapter President",
-        initials: "RM", color: "#00BFFF",
-        photo: "/leader-About.jpg",
+        photo: "/Leader-About.jpg",
     },
 ];
 
@@ -174,11 +170,14 @@ export default function AboutPage() {
                     {/* Vertical line */}
                     <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#0055A2] via-[#00BFFF] to-transparent" />
 
-                    {timeline.map(function ({ year, name, role, initials, color, photo }, i) {
+                    {timeline.map(function ({ year, name, role, photo }, i) {
                         const isRight = i % 2 === 0;
+                        const initials = name.split(" ").map((w) => w[0]).join("");
+                        const colors = ["#0055A2", "#0077cc", "#0099dd", "#00BFFF"];
+                        const color = colors[i % colors.length];
                         return (
                             <motion.div key={year}
-                                initial={{ opacity: 0, x: isRight ? -40 : 40 }}
+                                initial={{ opacity: 0, x: isRight ? -20 : 20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.55, delay: i * 0.1 }}
@@ -198,7 +197,6 @@ export default function AboutPage() {
                                                 alt={name}
                                                 className="absolute inset-0 w-full h-full object-cover object-top rounded-full"
                                                 onError={(e) => {
-                                                    // Hide broken image; the initials div underneath shows
                                                     (e.currentTarget as HTMLImageElement).style.display = "none";
                                                 }} />
                                             {/* Initials shown when photo is absent/loading */}
