@@ -55,19 +55,19 @@ const focusAreas = [
 
 const timeline = [
     {
-        year: "2026 – Present", name: "Manthan Dhangar", role: "Chapter President",
+        year: "2026 – Present", name: "Purv Kabaria", role: "Chapter President",
         photo: "/Leader-About.jpg",
     },
     {
-        year: "2025 – 2026", name: "Arjun Patel", role: "Chapter President",
+        year: "2025 – 2026", name: "Purv Kabaria", role: "Chapter President",
         photo: "/Leader-About.jpg",
     },
     {
-        year: "2024 – 2025", name: "Priya Sharma", role: "Chapter President",
+        year: "2024 – 2025", name: "Purv Kabaria", role: "Chapter President",
         photo: "/Leader-About.jpg"
     },
     {
-        year: "2023 – 2024", name: "Rahul Mehta", role: "Chapter President",
+        year: "2023 – 2024", name: "Purv Kabaria", role: "Chapter President",
         photo: "/Leader-About.jpg",
     },
 ];
@@ -195,11 +195,11 @@ export default function AboutPage() {
                                             <img
                                                 src={photo}
                                                 alt={name}
-                                                className="absolute inset-0 w-full h-full object-cover object-top rounded-full"
+                                                className="absolute inset-0 w-full h-full object-cover object-top rounded-full z-10"
                                                 onError={(e) => {
                                                     (e.currentTarget as HTMLImageElement).style.display = "none";
                                                 }} />
-                                            {/* Initials shown when photo is absent/loading */}
+                                            {/* Initials fallback — only visible when photo fails to load */}
                                             <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-lg select-none">
                                                 {initials}
                                             </span>
