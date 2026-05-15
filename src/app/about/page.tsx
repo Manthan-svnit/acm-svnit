@@ -55,27 +55,27 @@ const focusAreas = [
 const timeline = [
     {
         year: "2026 – Present", name: "Manthan Dhangar", role: "Chapter President",
-        initials: "MD", color: "#0055A2",
+        // initials: "MD", color: "#0055A2",
         // Place the photo at: public/leaders/manthan-dhangar.jpg
-        photo: "/leaders/manthan-dhangar.jpg",
+        photo: "/Leader-About.jpg",
     },
     {
         year: "2025 – 2026", name: "Arjun Patel", role: "Chapter President",
-        initials: "AP", color: "#0077cc",
+        // initials: "AP", color: "#0077cc",
         // Place the photo at: public/leaders/arjun-patel.jpg
-        photo: "/leaders/arjun-patel.jpg",
+        photo: "/Leader-About.jpg",
     },
     {
         year: "2024 – 2025", name: "Priya Sharma", role: "Chapter President",
-        initials: "PS", color: "#0099dd",
+        // initials: "PS", color: "#0099dd",
         // Place the photo at: public/leaders/priya-sharma.jpg
-        photo: "/leaders/priya-sharma.jpg",
+        photo: "/leader-About.jpg"
     },
     {
         year: "2023 – 2024", name: "Rahul Mehta", role: "Chapter President",
-        initials: "RM", color: "#00BFFF",
+        // initials: "RM", color: "#00BFFF",
         // Place the photo at: public/leaders/rahul-mehta.jpg
-        photo: "/leaders/rahul-mehta.jpg",
+        photo: "/leader-About.jpg",
     },
 ];
 

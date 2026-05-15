@@ -274,7 +274,7 @@ export default function ContactPage() {
                         <Phone className="text-acm-accent flex-shrink-0" size={24} />
                         <div>
                             <p className="font-semibold text-white">Phone</p>
-                            <p>+91 (Chapter Contact Number)</p>
+                            <p>+91 9316564230</p>
                         </div>
                     </div>
                 </div>

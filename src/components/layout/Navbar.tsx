@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -40,12 +41,19 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo Section */}
                     <div className="flex-shrink-0 flex items-center">
-                        <Link href="/" className="text-2xl font-bold text-white tracking-wider">
+                        <Link href="/" className="flex items-center gap-2.5 text-2xl font-bold text-white tracking-wider">
+                            <Image
+                                src="/ACM-logo.png"
+                                alt="ACM SVNIT Logo"
+                                width={40}
+                                height={40}
+                                className="w-10 h-10 object-contain"
+                                priority
+                            />
                             ACM <span className="text-acm-accent">SVNIT</span>
                         </Link>
                     </div>
 
-                    {/* Desktop Menu */}
                     <div className="hidden md:flex space-x-8 items-center">
                         {navLinks.map((link) => (
                             <Link
@@ -56,9 +64,6 @@ export default function Navbar() {
                                 {link.name}
                             </Link>
                         ))}
-                        <button className="bg-acm-primary hover:bg-blue-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition-colors">
-                            Join Us
-                        </button>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -91,9 +96,6 @@ export default function Navbar() {
                                 {link.name}
                             </Link>
                         ))}
-                        <button className="mt-4 w-full bg-acm-primary hover:bg-blue-700 text-white px-5 py-3 rounded-md text-base font-semibold transition-colors">
-                            Join Us
-                        </button>
                     </div>
                 </motion.div>
             )}
