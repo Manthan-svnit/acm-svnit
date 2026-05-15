@@ -6,6 +6,7 @@ import {
     Target, Eye, BookOpen, Cpu, Users, TrendingUp,
     Trophy, Star, Quote, ChevronRight,
 } from "lucide-react";
+import HeroBanner from "@/components/ui/HeroBanner";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 function fadeUp(delay = 0) {
@@ -96,49 +97,14 @@ export default function AboutPage() {
     return (
         <div className="bg-[#0a0a0a] text-white">
 
-            {/* 1 ── HERO ──────────────────────────────────────────────────────────── */}
-            <section className="relative min-h-screen flex items-center justify-center -mt-20 overflow-hidden">
-                {/* ── Background image ── Place your photo at: public/About-bg-image.jpg */}
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: "url('/About-bg-image.jpg')" }}
-                />
-                {/* Dark overlay — adjust opacity to taste (50% = more image, 75% = more text contrast) */}
-                <div className="absolute inset-0 bg-black/55" />
-                {/* Blue radial glow accent */}
-                <div className="absolute inset-0" style={{
-                    background: "radial-gradient(ellipse 70% 50% at 50% 100%, rgba(0,85,162,0.4) 0%, transparent 70%)",
-                }} />
-                {/* Subtle grid texture */}
-                <div className="absolute inset-0 opacity-[0.05]" style={{
-                    backgroundImage: "linear-gradient(rgba(0,191,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(0,191,255,0.6) 1px, transparent 1px)",
-                    backgroundSize: "50px 50px",
-                }} />
-
-                <div className="relative z-10 text-center px-4 pt-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-[#0055A2]/50 bg-[#0055A2]/10 text-[#00BFFF] text-xs font-semibold tracking-widest uppercase"
-                    >
-                        <ChevronRight size={12} /> Our Story
-                    </motion.div>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.1 }}
-                        className="font-heading text-5xl md:text-7xl font-black tracking-tight mb-5"
-                    >
-                        About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0055A2] to-[#00BFFF]">Us</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
-                    >
-                        Empowering Tomorrow's Tech Leaders Through Innovation, Learning, and Community.
-                    </motion.p>
-                </div>
-            </section>
+            {/* 1 ── HERO (Shared HeroBanner — change bg image in HeroBanner.tsx) ── */}
+            <HeroBanner
+                pillLabel="Our Story"
+                pillIcon={<ChevronRight size={12} />}
+                titleStart="About"
+                titleHighlight="Us"
+                subtitle="Empowering Tomorrow's Tech Leaders Through Innovation, Learning, and Community."
+            />
 
             {/* 2 ── MISSION & VISION ──────────────────────────────────────────────── */}
             <section className="py-24 px-4">

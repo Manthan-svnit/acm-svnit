@@ -1,22 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// 1. We added getDocs, query, and orderBy to fetch and sort the messages!
 import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
 import { signInWithPopup, signOut, onAuthStateChanged, User } from "firebase/auth";
 import { db, auth, googleProvider } from "@/lib/firebase";
 import SectionHeader from "@/components/ui/SectionHeader";
-// 2. Added the MessageSquare icon for the new tab
 import { Calendar, Users, LogOut, ShieldAlert, MessageSquare } from "lucide-react";
 
 // ==========================================
 // THE WHITELIST
 // ==========================================
 const ALLOWED_EMAILS = [
-    "manthanmd21@gmail.com",
+    "manthanmd21@gmail.com"
 ];
 
-// Interface for TypeScript to understand what a message looks like
+// ==========================================
+// INTERFACES
+// ==========================================
 interface ContactMessage {
     id: string;
     admissionNo: string;
@@ -29,32 +29,33 @@ interface ContactMessage {
     createdAt: any;
 }
 
+type EventStatus = "upcoming" | "ongoing" | "past";
+
 export default function AdminDashboard() {
-    // --- AUTHENTICATION STATE ---
     const [user, setUser] = useState<User | null>(null);
     const [isAuthLoading, setIsAuthLoading] = useState(true);
     const [authError, setAuthError] = useState("");
 
-    // --- DASHBOARD STATE ---
-    // 3. Upgraded activeTab to include "messages"
     const [activeTab, setActiveTab] = useState<"event" | "team" | "messages">("event");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
 
-    // --- MESSAGE FETCHING STATE ---
     const [messagesList, setMessagesList] = useState<ContactMessage[]>([]);
     const [isFetchingMessages, setIsFetchingMessages] = useState(false);
 
-    // --- FORM STATES ---
+    // --- EVENT FORM STATES ---
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
+    const [eventImageUrls, setEventImageUrls] = useState(""); // Comma-separated Cloudinary URLs
+    const [eventStatus, setEventStatus] = useState<EventStatus>("upcoming");
 
+    // --- TEAM FORM STATES ---
     const [name, setName] = useState("");
     const [role, setRole] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+    const [teamImageUrl, setTeamImageUrl] = useState("");
     const [linkedinUrl, setLinkedinUrl] = useState("");
     const [githubUrl, setGithubUrl] = useState("");
 
@@ -91,12 +92,9 @@ export default function AdminDashboard() {
     // ==========================================
     // DATABASE FETCH & SUBMIT LOGIC
     // ==========================================
-
-    // 4. Function to download messages from Firebase
     const fetchMessages = async () => {
         setIsFetchingMessages(true);
         try {
-            // Query Firebase, ordering by newest first!
             const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
             const querySnapshot = await getDocs(q);
 
@@ -113,7 +111,6 @@ export default function AdminDashboard() {
         }
     };
 
-    // 5. Automatically fetch messages when the user clicks the Messages tab
     useEffect(() => {
         if (activeTab === "messages") {
             fetchMessages();
@@ -124,11 +121,25 @@ export default function AdminDashboard() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
+            // Split comma-separated URLs into a clean array, filtering empty strings
+            const imageUrls = eventImageUrls
+                .split(",")
+                .map((url) => url.trim())
+                .filter((url) => url.length > 0);
+
             await addDoc(collection(db, "events"), {
-                title, date, time, location, description, isUpcoming: true, createdAt: new Date(),
+                title,
+                date,
+                time,
+                location,
+                description,
+                imageUrls,          // Array of Cloudinary URLs
+                status: eventStatus, // "upcoming" | "ongoing" | "past"
+                createdAt: new Date(),
             });
             setSuccessMessage("✅ Event successfully added!");
-            setTitle(""); setDate(""); setTime(""); setLocation(""); setDescription("");
+            setTitle(""); setDate(""); setTime(""); setLocation("");
+            setDescription(""); setEventImageUrls(""); setEventStatus("upcoming");
         } catch (error) {
             alert("Failed to add event.");
         } finally {
@@ -141,16 +152,26 @@ export default function AdminDashboard() {
         setIsSubmitting(true);
         try {
             await addDoc(collection(db, "team"), {
-                name, role, imageUrl, linkedinUrl, githubUrl, createdAt: new Date(),
+                name,
+                role,
+                imageUrl: teamImageUrl,
+                linkedinUrl,
+                githubUrl,
+                createdAt: new Date(),
             });
             setSuccessMessage("✅ Team Member successfully added!");
-            setName(""); setRole(""); setImageUrl(""); setLinkedinUrl(""); setGithubUrl("");
+            setName(""); setRole(""); setTeamImageUrl(""); setLinkedinUrl(""); setGithubUrl("");
         } catch (error) {
             alert("Failed to add team member.");
         } finally {
             setIsSubmitting(false);
         }
     };
+
+    // ==========================================
+    // SHARED INPUT STYLE
+    // ==========================================
+    const inputClass = "w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:border-acm-accent focus:outline-none transition-colors";
 
     // ==========================================
     // UI RENDERERS
@@ -203,36 +224,118 @@ export default function AdminDashboard() {
 
                 {successMessage && <div className="mb-6 p-4 bg-green-900/20 border border-green-500/50 text-green-400 rounded-lg text-center font-medium">{successMessage}</div>}
 
-                {/* --- DYNAMIC RENDERING --- */}
+                {/* ═══════════════════════════════════════════
+                    EVENT FORM (with Status + Multi-Image)
+                   ═══════════════════════════════════════════ */}
                 {activeTab === "event" && (
                     <form onSubmit={handleEventSubmit} className="space-y-4 animate-in fade-in duration-500 max-w-3xl mx-auto">
-                        <div><label className="block text-acm-gray text-sm font-medium mb-1">Event Title</label><input required type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div><label className="block text-acm-gray text-sm font-medium mb-1">Date</label><input required type="text" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
-                            <div><label className="block text-acm-gray text-sm font-medium mb-1">Time</label><input required type="text" value={time} onChange={(e) => setTime(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
+                        {/* Title */}
+                        <div>
+                            <label className="block text-acm-gray text-sm font-medium mb-1">Event Title</label>
+                            <input required type="text" value={title} onChange={(e) => setTitle(e.target.value)} className={inputClass} />
                         </div>
-                        <div><label className="block text-acm-gray text-sm font-medium mb-1">Location</label><input required type="text" value={location} onChange={(e) => setLocation(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
-                        <div><label className="block text-acm-gray text-sm font-medium mb-1">Description</label><textarea required rows={3} value={description} onChange={(e) => setDescription(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none resize-none" /></div>
-                        <button type="submit" disabled={isSubmitting} className="w-full bg-acm-primary hover:bg-blue-700 text-white font-bold py-3 rounded-lg mt-4 disabled:opacity-50">{isSubmitting ? "Pushing..." : "Create Event"}</button>
+
+                        {/* Event Status Dropdown */}
+                        <div>
+                            <label className="block text-acm-gray text-sm font-medium mb-1">Event Status</label>
+                            <select
+                                value={eventStatus}
+                                onChange={(e) => setEventStatus(e.target.value as EventStatus)}
+                                className={`${inputClass} appearance-none cursor-pointer`}
+                            >
+                                <option value="upcoming">🟢 Upcoming</option>
+                                <option value="ongoing">🟡 Ongoing</option>
+                                <option value="past">⚪ Past</option>
+                            </select>
+                        </div>
+
+                        {/* Multiple Image URLs (comma-separated) */}
+                        <div>
+                            <label className="block text-acm-gray text-sm font-medium mb-1">
+                                Event Image URLs (Cloudinary)
+                            </label>
+                            <textarea
+                                rows={3}
+                                value={eventImageUrls}
+                                onChange={(e) => setEventImageUrls(e.target.value)}
+                                placeholder="Paste comma-separated Cloudinary URLs&#10;e.g., https://res.cloudinary.com/img1.jpg, https://res.cloudinary.com/img2.jpg"
+                                className={`${inputClass} resize-none`}
+                            />
+                            <p className="text-gray-600 text-xs mt-1">
+                                Separate multiple URLs with commas. First image is the main poster.
+                            </p>
+                        </div>
+
+                        {/* Date & Time */}
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-acm-gray text-sm font-medium mb-1">Date</label>
+                                <input required type="text" value={date} onChange={(e) => setDate(e.target.value)} className={inputClass} />
+                            </div>
+                            <div>
+                                <label className="block text-acm-gray text-sm font-medium mb-1">Time</label>
+                                <input required type="text" value={time} onChange={(e) => setTime(e.target.value)} className={inputClass} />
+                            </div>
+                        </div>
+
+                        {/* Location */}
+                        <div>
+                            <label className="block text-acm-gray text-sm font-medium mb-1">Location</label>
+                            <input required type="text" value={location} onChange={(e) => setLocation(e.target.value)} className={inputClass} />
+                        </div>
+
+                        {/* Description */}
+                        <div>
+                            <label className="block text-acm-gray text-sm font-medium mb-1">Description</label>
+                            <textarea required rows={3} value={description} onChange={(e) => setDescription(e.target.value)} className={`${inputClass} resize-none`} />
+                        </div>
+
+                        <button type="submit" disabled={isSubmitting} className="w-full bg-acm-primary hover:bg-blue-700 text-white font-bold py-3 rounded-lg mt-4 disabled:opacity-50 transition-colors">
+                            {isSubmitting ? "Pushing..." : "Create Event"}
+                        </button>
                     </form>
                 )}
 
+                {/* ═══════════════════════════════════════════
+                    TEAM FORM
+                   ═══════════════════════════════════════════ */}
                 {activeTab === "team" && (
                     <form onSubmit={handleTeamSubmit} className="space-y-4 animate-in fade-in duration-500 max-w-3xl mx-auto">
                         <div className="grid grid-cols-2 gap-4">
-                            <div><label className="block text-acm-gray text-sm font-medium mb-1">Full Name</label><input required type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
-                            <div><label className="block text-acm-gray text-sm font-medium mb-1">Chapter Role</label><input required type="text" value={role} onChange={(e) => setRole(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
+                            <div>
+                                <label className="block text-acm-gray text-sm font-medium mb-1">Full Name</label>
+                                <input required type="text" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} />
+                            </div>
+                            <div>
+                                <label className="block text-acm-gray text-sm font-medium mb-1">Chapter Role</label>
+                                <input required type="text" value={role} onChange={(e) => setRole(e.target.value)} className={inputClass} />
+                            </div>
                         </div>
-                        <div><label className="block text-acm-gray text-sm font-medium mb-1">Profile Image URL (Optional)</label><input type="url" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
+
+                        <div>
+                            <label className="block text-acm-gray text-sm font-medium mb-1">Profile Photo URL (Cloudinary Link)</label>
+                            <input required type="url" value={teamImageUrl} onChange={(e) => setTeamImageUrl(e.target.value)} placeholder="e.g., https://res.cloudinary.com/..." className={inputClass} />
+                        </div>
+
                         <div className="grid grid-cols-2 gap-4">
-                            <div><label className="block text-acm-gray text-sm font-medium mb-1">LinkedIn URL (Optional)</label><input type="url" value={linkedinUrl} onChange={(e) => setLinkedinUrl(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
-                            <div><label className="block text-acm-gray text-sm font-medium mb-1">GitHub URL (Optional)</label><input type="url" value={githubUrl} onChange={(e) => setGithubUrl(e.target.value)} className="w-full bg-acm-bg-dark border border-gray-800 rounded-lg px-4 py-2 text-white focus:border-acm-accent focus:outline-none" /></div>
+                            <div>
+                                <label className="block text-acm-gray text-sm font-medium mb-1">LinkedIn URL (Optional)</label>
+                                <input type="url" value={linkedinUrl} onChange={(e) => setLinkedinUrl(e.target.value)} className={inputClass} />
+                            </div>
+                            <div>
+                                <label className="block text-acm-gray text-sm font-medium mb-1">GitHub URL (Optional)</label>
+                                <input type="url" value={githubUrl} onChange={(e) => setGithubUrl(e.target.value)} className={inputClass} />
+                            </div>
                         </div>
-                        <button type="submit" disabled={isSubmitting} className="w-full bg-acm-primary hover:bg-blue-700 text-white font-bold py-3 rounded-lg mt-4 disabled:opacity-50">{isSubmitting ? "Pushing..." : "Add Team Member"}</button>
+                        <button type="submit" disabled={isSubmitting} className="w-full bg-acm-primary hover:bg-blue-700 text-white font-bold py-3 rounded-lg mt-4 disabled:opacity-50 transition-colors">
+                            {isSubmitting ? "Pushing..." : "Add Team Member"}
+                        </button>
                     </form>
                 )}
 
-                {/* --- NEW MESSAGES INBOX UI --- */}
+                {/* ═══════════════════════════════════════════
+                    MESSAGES INBOX
+                   ═══════════════════════════════════════════ */}
                 {activeTab === "messages" && (
                     <div className="space-y-6 animate-in fade-in duration-500">
                         {isFetchingMessages ? (
@@ -242,7 +345,6 @@ export default function AdminDashboard() {
                         ) : (
                             messagesList.map((msg) => (
                                 <div key={msg.id} className="bg-acm-bg-dark border border-gray-800 p-6 rounded-xl relative hover:border-acm-accent/50 transition-colors">
-                                    {/* Unread Badge */}
                                     {msg.status === "unread" && (
                                         <div className="absolute top-4 right-4 bg-acm-primary text-white text-xs font-bold px-3 py-1 rounded-full">NEW</div>
                                     )}

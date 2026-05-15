@@ -121,7 +121,7 @@ function Preloader({ onComplete }: { onComplete: () => void }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4, duration: 0.6 }}
       >
-        <p className="text-white text-2xl font-bold tracking-[0.3em]">ACM</p>
+        <p className="font-heading text-white text-2xl font-bold tracking-[0.3em]">ACM</p>
         <p className="text-[#00BFFF] text-sm tracking-[0.5em] mt-1 uppercase">
           SVNIT
         </p>
@@ -240,7 +240,7 @@ function AwardsCarousel() {
             >
               <Icon size={42} style={{ color: award.color }} />
             </motion.div>
-            <h3 className="text-white text-2xl font-bold mb-3">
+            <h3 className="font-heading text-white text-2xl font-bold mb-3">
               {award.title}
             </h3>
             <p className="text-gray-400 text-base max-w-md leading-relaxed">
@@ -318,7 +318,7 @@ function StatCard({
       <div className="mb-4 p-3 rounded-full bg-[#0055A2]/20 group-hover:bg-[#0055A2]/40 transition-colors duration-300">
         <Icon className="text-[#00BFFF]" size={28} />
       </div>
-      <span className="text-4xl font-extrabold text-white tracking-tight">
+      <span className="font-heading text-4xl font-extrabold text-white tracking-tight">
         {value}
       </span>
       <span className="text-gray-400 mt-2 text-sm uppercase tracking-widest">
@@ -358,7 +358,7 @@ function FeatureCard({
         <div className="bg-[#0055A2]/10 p-4 rounded-full w-fit mx-auto mb-5 group-hover:scale-110 group-hover:bg-[#0055A2]/30 transition-all duration-300">
           <Icon className="text-[#00BFFF]" size={32} />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+        <h3 className="font-heading text-xl font-bold text-white mb-2">{title}</h3>
         <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
         <div className="mt-5 flex items-center justify-center gap-1 text-[#00BFFF] text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           Explore <ArrowRight size={14} />
@@ -434,7 +434,7 @@ export default function Home() {
               hidden: { opacity: 0, y: 40 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
             }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none mb-4"
+            className="font-heading text-6xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none mb-4"
           >
             <span className="text-white">ACM </span>
             <span
@@ -544,7 +544,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white"
+              className="font-heading text-4xl md:text-5xl font-black text-white"
             >
               Awards &amp;{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0055A2] to-[#00BFFF]">
@@ -581,7 +581,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white"
+              className="font-heading text-4xl md:text-5xl font-black text-white"
             >
               Everything{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0055A2] to-[#00BFFF]">
@@ -641,7 +641,7 @@ export default function Home() {
               <Code2 size={20} />
               <Globe size={20} />
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+            <h2 className="font-heading text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
               Aspire. Commit.{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0055A2] to-[#00BFFF]">
                 Manifest.
