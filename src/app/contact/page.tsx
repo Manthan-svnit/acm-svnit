@@ -240,17 +240,17 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen pt-12 px-4 sm:px-6 lg:px-8 pb-24 max-w-7xl mx-auto">
+        <div className="min-h-screen pt-8 md:pt-12 px-4 sm:px-6 lg:px-8 pb-16 md:pb-24 max-w-7xl mx-auto">
             <SectionHeader
                 title="Get in"
                 highlight="Touch"
                 subtitle="Have a question about upcoming events or want to join the chapter? Send us a message."
             />
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mt-8 md:mt-12">
 
                 {/* --- LEFT COLUMN: CONTACT INFO --- */}
-                <div className="bg-[#111111] p-8 rounded-2xl border border-acm-border/10 flex flex-col gap-8 h-fit">
+                <div className="bg-[#111111] p-5 sm:p-6 md:p-8 rounded-2xl border border-acm-border/10 flex flex-col gap-6 md:gap-8 h-fit">
                     <h3 className="text-2xl font-bold text-white mb-2">Contact Information</h3>
 
                     <div className="flex items-start gap-4 text-acm-gray hover:text-white transition-colors">
@@ -280,7 +280,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* --- RIGHT COLUMN: THE FORM --- */}
-                <div className="lg:col-span-2 bg-[#111111] p-8 rounded-2xl border border-acm-border/10 shadow-2xl">
+                <div className="lg:col-span-2 bg-[#111111] p-5 sm:p-6 md:p-8 rounded-2xl border border-acm-border/10 shadow-2xl">
                     <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>
 
                     {status === "success" && (

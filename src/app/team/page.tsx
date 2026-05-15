@@ -126,7 +126,7 @@ function MemberCard({ member }: { member: TeamMember }) {
 
         {/* Image container */}
         <motion.div
-          className="relative w-40 h-40 rounded-full overflow-hidden border-2 border-gray-800
+          className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-gray-800
                      group-hover:border-[#0055A2] transition-colors duration-400 bg-[#1a1a1a]"
           whileHover={{ scale: 1.06 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -180,7 +180,7 @@ function SkeletonCard() {
   return (
     <div className="flex flex-col items-center text-center px-4 py-8 animate-pulse">
       {/* Circle skeleton */}
-      <div className="w-40 h-40 rounded-full bg-gray-800/60 mb-5" />
+      <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full bg-gray-800/60 mb-5" />
       {/* Name skeleton */}
       <div className="h-5 w-32 rounded-full bg-gray-800/60 mb-2" />
       {/* Role skeleton */}
@@ -239,7 +239,7 @@ export default function TeamPage() {
       {/* ══════════════════════════════════════════════════════════════════════
            2. TEAM GRID — CIRCULAR PROFILES
          ══════════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pt-20 pb-28 max-w-7xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20 pb-16 md:pb-28 max-w-7xl mx-auto">
         <AnimatePresence mode="wait">
           {loading ? (
             /* ── Loading Skeleton Grid ── */
@@ -248,7 +248,7 @@ export default function TeamPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2"
+              className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-4"
             >
               {Array.from({ length: 8 }).map((_, i) => (
                 <SkeletonCard key={i} />
@@ -281,7 +281,7 @@ export default function TeamPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2"
+              className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-4"
             >
               {team.map((member) => (
                 <MemberCard key={member.id} member={member} />

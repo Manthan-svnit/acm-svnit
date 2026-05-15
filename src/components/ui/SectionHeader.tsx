@@ -9,14 +9,14 @@ interface SectionHeaderProps {
 
 export default function SectionHeader({ title, highlight, subtitle }: SectionHeaderProps) {
     return (
-        <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+        <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 tracking-tight">
                 {title} <span className="text-acm-accent">{highlight}</span>
             </h2>
 
             {/* If a subtitle is provided, render this paragraph */}
             {subtitle && (
-                <p className="text-lg text-acm-gray max-w-3xl mx-auto">
+                <p className="text-base md:text-lg text-acm-gray max-w-3xl mx-auto px-2">
                     {subtitle}
                 </p>
             )}

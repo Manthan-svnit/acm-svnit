@@ -36,7 +36,7 @@ export default function HeroBanner({
   breadcrumb,
 }: HeroBannerProps) {
   return (
-    <section className="relative h-[65vh] min-h-[420px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[50vh] sm:h-[55vh] md:h-[65vh] min-h-[380px] flex items-center justify-center overflow-hidden">
       {/* ── Background image ── */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -63,13 +63,13 @@ export default function HeroBanner({
       />
 
       {/* ── Content ── */}
-      <div className="relative z-10 text-center px-4">
+      <div className="relative z-10 text-center px-4 sm:px-6">
         {/* Pill badge */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-[#0055A2]/50 bg-[#0055A2]/10 text-[#00BFFF] text-xs font-semibold tracking-widest uppercase"
+          className="inline-flex items-center gap-2 mb-4 md:mb-5 px-3 py-1.5 sm:px-4 rounded-full border border-[#0055A2]/50 bg-[#0055A2]/10 text-[#00BFFF] text-[10px] sm:text-xs font-semibold tracking-widest uppercase"
         >
           {pillIcon || <ChevronRight size={12} />}
           {pillLabel}
@@ -80,7 +80,7 @@ export default function HeroBanner({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-heading text-5xl md:text-7xl font-black tracking-tight mb-5"
+          className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tight mb-4 md:mb-5"
         >
           {titleStart}{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0055A2] to-[#00BFFF]">
@@ -99,7 +99,7 @@ export default function HeroBanner({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
         >
           {subtitle}
         </motion.p>

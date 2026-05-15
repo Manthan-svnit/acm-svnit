@@ -80,7 +80,7 @@ function CinematicCarousel({ images, title }: { images: string[]; title: string 
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
 
   return (
-    <div className="relative w-full h-full min-h-[280px] md:min-h-[420px] overflow-hidden bg-[#0d0d0d]">
+    <div className="relative w-full h-full min-h-[220px] sm:min-h-[280px] md:min-h-[420px] overflow-hidden bg-[#0d0d0d]">
       <AnimatePresence mode="wait">
         <motion.img
           key={current}
@@ -130,11 +130,10 @@ function CinematicCarousel({ images, title }: { images: string[]; title: string 
                 key={i}
                 onClick={() => setCurrent(i)}
                 aria-label={`Go to image ${i + 1}`}
-                className={`h-2 rounded-full transition-all duration-400 ${
-                  i === current
-                    ? "bg-[#00BFFF] w-7"
-                    : "bg-white/25 w-2 hover:bg-white/40"
-                }`}
+                className={`h-2 rounded-full transition-all duration-400 ${i === current
+                  ? "bg-[#00BFFF] w-7"
+                  : "bg-white/25 w-2 hover:bg-white/40"
+                  }`}
               />
             ))}
           </div>
@@ -159,7 +158,7 @@ function EventShowcase({ event, status, isReversed }: { event: ACMEvent; status:
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -182,14 +181,14 @@ function EventShowcase({ event, status, isReversed }: { event: ACMEvent; status:
           {hasImages ? (
             <CinematicCarousel images={images} title={event.title} />
           ) : (
-            <div className="w-full h-full min-h-[280px] md:min-h-[420px] bg-gradient-to-br from-[#0055A2]/8 to-[#111111] flex items-center justify-center">
+            <div className="w-full h-full min-h-[220px] sm:min-h-[280px] md:min-h-[420px] bg-gradient-to-br from-[#0055A2]/8 to-[#111111] flex items-center justify-center">
               <Calendar size={64} className="text-gray-800" strokeWidth={1} />
             </div>
           )}
         </div>
 
         {/* ── Details Side ── */}
-        <div className="lg:w-[40%] p-8 md:p-10 flex flex-col justify-center relative z-10">
+        <div className="lg:w-[40%] p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-center relative z-10">
 
           {/* Status badge */}
           <div className="mb-5">
@@ -212,13 +211,13 @@ function EventShowcase({ event, status, isReversed }: { event: ACMEvent; status:
           </div>
 
           {/* Title */}
-          <h3 className="font-heading text-2xl md:text-3xl font-black text-white leading-tight mb-5
+          <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight mb-4 md:mb-5
                          group-hover:text-[#00BFFF] transition-colors duration-400">
             {event.title}
           </h3>
 
           {/* Meta details */}
-          <div className="space-y-2.5 mb-6">
+          <div className="space-y-2 sm:space-y-2.5 mb-5 md:mb-6">
             <div className="flex items-center gap-3 text-sm text-gray-400">
               <div className="w-8 h-8 rounded-lg bg-[#0055A2]/10 flex items-center justify-center flex-shrink-0">
                 <Calendar size={14} className="text-[#0055A2]" />
@@ -246,25 +245,6 @@ function EventShowcase({ event, status, isReversed }: { event: ACMEvent; status:
           <p className="text-gray-500 text-sm leading-relaxed mb-7 line-clamp-4">
             {event.description}
           </p>
-
-          {/* CTA Button */}
-          <button
-            className="inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl font-semibold text-sm tracking-wide
-                       transition-all duration-300 group/btn w-full sm:w-auto"
-            style={{
-              background: isActive
-                ? "linear-gradient(135deg, #0055A2 0%, #003d75 100%)"
-                : "transparent",
-              color: isActive ? "#ffffff" : "#6B7280",
-              border: isActive ? "1px solid rgba(0,85,162,0.5)" : "1px solid #2a2a2a",
-            }}
-          >
-            {isActive ? (
-              <>RSVP Now <ArrowRight size={15} className="group-hover/btn:translate-x-0.5 transition-transform" /></>
-            ) : (
-              <>View Recap <ArrowRight size={15} className="group-hover/btn:translate-x-0.5 transition-transform" /></>
-            )}
-          </button>
         </div>
       </div>
     </motion.div>
@@ -302,8 +282,8 @@ function SkeletonShowcase() {
   return (
     <div className="rounded-2xl bg-[#111111] border border-gray-800 overflow-hidden animate-pulse">
       <div className="flex flex-col lg:flex-row">
-        <div className="lg:w-[60%] min-h-[280px] md:min-h-[420px] bg-gray-800/40" />
-        <div className="lg:w-[40%] p-8 md:p-10 space-y-4">
+        <div className="lg:w-[60%] min-h-[220px] sm:min-h-[280px] md:min-h-[420px] bg-gray-800/40" />
+        <div className="lg:w-[40%] p-5 sm:p-6 md:p-8 lg:p-10 space-y-4">
           <div className="h-6 w-24 bg-gray-800/50 rounded-full" />
           <div className="h-8 w-3/4 bg-gray-800/60 rounded-lg" />
           <div className="space-y-3 mt-4">
@@ -371,7 +351,7 @@ export default function EventsPage() {
       {/* ══════════════════════════════════════════════════════════════════════
            2. ACHIEVEMENT STATS
          ══════════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pt-20 pb-20 max-w-5xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20 pb-16 md:pb-20 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -380,7 +360,7 @@ export default function EventsPage() {
           className="text-center mb-10"
         >
           <p className="text-[#00BFFF] text-sm font-semibold tracking-[0.3em] uppercase mb-2">Our Impact</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-black text-white">
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-black text-white">
             Achievements & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0055A2] to-[#00BFFF]">Milestones</span>
           </h2>
         </motion.div>
@@ -393,7 +373,7 @@ export default function EventsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative p-7 rounded-2xl bg-[#111111] border border-gray-800
+              className="group relative p-5 sm:p-6 md:p-7 rounded-2xl bg-[#111111] border border-gray-800
                          hover:border-[#0055A2]/50 transition-all duration-300 text-center overflow-hidden"
             >
               <div
@@ -409,7 +389,7 @@ export default function EventsPage() {
                 >
                   <Icon size={22} style={{ color }} />
                 </div>
-                <p className="font-heading text-4xl font-black text-white mb-1 group-hover:scale-105 transition-transform duration-300">
+                <p className="font-heading text-3xl md:text-4xl font-black text-white mb-1 group-hover:scale-105 transition-transform duration-300">
                   {value}
                 </p>
                 <p className="text-gray-500 text-sm uppercase tracking-widest">{label}</p>
@@ -423,7 +403,7 @@ export default function EventsPage() {
            3. EVENT SHOWCASE SECTIONS (Ongoing → Upcoming → Past)
               Stacked vertically — each event is a wide, immersive block
          ══════════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-28 max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 pb-16 md:pb-28 max-w-6xl mx-auto">
         {loading ? (
           <div className="space-y-8">
             {Array.from({ length: 3 }).map((_, i) => (
@@ -459,7 +439,7 @@ export default function EventsPage() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="relative p-12 rounded-2xl bg-[#111111] border border-dashed border-gray-700 text-center"
+                    className="relative p-8 sm:p-10 md:p-12 rounded-2xl bg-[#111111] border border-dashed border-gray-700 text-center"
                   >
                     <Rocket size={40} className="text-gray-700 mx-auto mb-4" />
                     <p className="text-gray-400 font-heading font-bold text-lg mb-1">

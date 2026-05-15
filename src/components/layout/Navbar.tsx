@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -41,13 +41,13 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo Section */}
                     <div className="flex-shrink-0 flex items-center">
-                        <Link href="/" className="flex items-center gap-2.5 text-2xl font-bold text-white tracking-wider">
+                        <Link href="/" className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-white tracking-wider">
                             <Image
                                 src="/ACM-logo.png"
                                 alt="ACM SVNIT Logo"
                                 width={40}
                                 height={40}
-                                className="w-10 h-10 object-contain"
+                                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
                                 priority
                             />
                             ACM <span className="text-acm-accent">SVNIT</span>
@@ -79,26 +79,36 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu Dropdown */}
-            {isOpen && (
-                <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="md:hidden bg-acm-bg-dark border-b border-acm-border/20"
-                >
-                    <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3 flex flex-col">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.path}
-                                onClick={() => setIsOpen(false)}
-                                className="text-gray-300 hover:text-acm-accent block px-3 py-3 rounded-md text-base font-medium"
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                    </div>
-                </motion.div>
-            )}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="md:hidden bg-acm-bg-dark/95 backdrop-blur-md border-b border-acm-border/20 overflow-hidden"
+                    >
+                        <div className="px-4 pt-2 pb-4 space-y-1 flex flex-col">
+                            {navLinks.map((link, i) => (
+                                <motion.div
+                                    key={link.name}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.05 }}
+                                >
+                                    <Link
+                                        href={link.path}
+                                        onClick={() => setIsOpen(false)}
+                                        className="text-gray-300 hover:text-acm-accent block px-3 py-3 rounded-md text-base font-medium transition-colors"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.nav>
     );
 }

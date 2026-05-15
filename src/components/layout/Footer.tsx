@@ -4,12 +4,12 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-[#111111] text-gray-400 border-t border-acm-border/10 pt-16 pb-8">
+        <footer className="bg-[#111111] text-gray-400 border-t border-acm-border/10 pt-10 pb-6 md:pt-16 md:pb-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8 md:gap-12 md:mb-12">
 
                     {/* Brand Col */}
-                    <div className="col-span-1 md:col-span-2">
+                    <div className="col-span-1 sm:col-span-2">
                         <Link href="/" className="text-2xl font-bold text-white tracking-wider mb-4 block">
                             ACM <span className="text-acm-accent">SVNIT</span>
                         </Link>
