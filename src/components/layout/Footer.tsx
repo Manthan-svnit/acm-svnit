@@ -14,7 +14,7 @@ export default function Footer() {
                             ACM <span className="text-acm-accent">SVNIT</span>
                         </Link>
                         <p className="text-sm leading-relaxed max-w-sm mt-4">
-                            Advancing Computing as a Science & Profession. We strive to foster a community of passionate computing enthusiasts at the National Institute of Technology, Surat.
+                            ACM NIT-Surat is a student chapter highly focused on planning and organising events for coding, development, design.
                         </p>
                     </div>
 

@@ -55,20 +55,20 @@ const focusAreas = [
 
 const timeline = [
     {
-        year: "2026 – Present", name: "Purv Kabaria", role: "Chapter President",
-        photo: "/Leader-About.jpg",
+        year: "2026 – Present", name: "Smith Marakna", role: "Chair person",
+        photo: "/Leader-About'25.jpg",
     },
     {
-        year: "2025 – 2026", name: "Purv Kabaria", role: "Chapter President",
-        photo: "/Leader-About.jpg",
+        year: "2025 – 2026", name: "Param Pathak", role: "Chair person",
+        photo: "/Leader-About'24.jpg",
     },
     {
-        year: "2024 – 2025", name: "Purv Kabaria", role: "Chapter President",
-        photo: "/Leader-About.jpg"
+        year: "2024 – 2025", name: "Garvit Shah", role: "Chair person",
+        photo: "/Leader-About'23.jpg"
     },
     {
-        year: "2023 – 2024", name: "Purv Kabaria", role: "Chapter President",
-        photo: "/Leader-About.jpg",
+        year: "2023 – 2024", name: "Vishvesh Trivedi", role: "Chair person",
+        photo: "/Leader-About'22.jpg",
     },
 ];
 
