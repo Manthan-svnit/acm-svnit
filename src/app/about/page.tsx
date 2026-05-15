@@ -290,12 +290,12 @@ import HeroBanner from "@/components/ui/HeroBanner";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 // FIX 1: Added ': any' so TypeScript doesn't complain about spreading this into Framer Motion
-function fadeUp(delay = 0): any {
+function fadeUp(delay = 0) {
     return {
         initial: { opacity: 0, y: 32 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true },
-        transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
     };
 }
 
